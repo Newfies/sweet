@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap');
+
+body {
+    /* background-color: #fff8f0; */
+    background-color: black;
+    margin: 0;
+    padding: 0;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    border: 3px solid #ffeaa7;
+    width: 50%;
+    padding: 3%;
+    margin: 1% auto;
+    background-color: #f8a5c2;
+    background-image: url('223.png');
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+}
+
+.menu .header {
+    font-family: "DynaPuff", system-ui;
+    font-size: 4rem;
+    font-weight: 700;
+    margin: 0;
+    color: white;   
+}
+
+.menu .info {
+    margin-top: 2%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu .info form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.menu .info form input {
+    font-family: "DynaPuff", system-ui;
+    width: 75%;
+    background-color: #74b9ff;
+    border: none;
+    border-radius: 16px;
+    outline: none;
+    padding: 3% 6%;
+    color: white;
+    margin-top: 1%;
+    font-weight: 600;
+    font-size: 1.25em;
+    transition: 0.1s ease-in
+}
+
+.menu .info form input:hover {
+    background-color: #5d94cc; 
+}
+
+.menu .info form input::placeholder {
+    color: white;
+}
+
+.menu .info form input.submit {
+    width: 35%;
+    border-radius: 16px;
+    transition: 0.1s ease-in
+}

@@ -1,0 +1,36 @@
+{
+  "name": "sweet",
+  "version": "1.0.0",
+  "description": "Short and Sweet, a URL Shortener service.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Newfies/sweet.git"
+  },
+  "keywords": [
+    "url",
+    "shortener"
+  ],
+  "author": "Newfies",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Newfies/sweet/issues"
+  },
+  "homepage": "https://github.com/Newfies/sweet#readme",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "nanoid": "^5.1.5",
+    "nedb": "^1.8.0",
+    "nodemon": "^3.1.10",
+    "path": "^0.12.7",
+    "valid-url": "^1.0.9"
+  }
+}
