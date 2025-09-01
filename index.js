@@ -4,6 +4,7 @@ const session = require('express-session');
 const bodyparser = require('body-parser');
 const cors = require('cors');
 const nedb = require('nedb');
+const db = new nedb({ filename: 'links.db', autoload: true });
 const nanoid = require('nanoid');
 const validurl = require('valid-url');
 const path = require('path');
@@ -29,21 +30,53 @@ app.use(session({
 }));
 
 /* Post */
-app.post('/', function(req, res){
-    const { inplink, inpslug, inpsubmit } = req.body;
+app.post('/', function(req, res) {
+    let { inplink, inpslug, inpsubmit } = req.body;
 
     if (inpsubmit === "link") {
-        // do x
-    } else {
-        // handle other actions if needed
-    }
 
-    res.send(`url.com/${inpslug} will goto ${inplink}`);
-})
+        // Validate URL
+        if (!validurl.isWebUri(inplink)) {
+            return res.send("Invalid URL!");
+        }
+
+        // Generate slug if not provided
+        if (!inpslug || inpslug.trim() === "") {
+            inpslug = nanoid.nanoid(6); // 6-character random ID
+        }
+
+        // Check if slug already exists
+        db.findOne({ slug: inpslug }, (err, doc) => {
+            if (doc) {
+                return res.send("Slug already taken! Try another.");
+            }
+
+            // Save to database
+            db.insert({ slug: inpslug, url: inplink }, (err, newDoc) => {
+                if (err) return res.send("Error saving URL.");
+                res.send(`Short URL created: <a href="/${inpslug}">url.com/${inpslug}</a>`);
+            });
+        });
+    } else {
+        res.send("Unknown action.");
+    }
+});
 
 /* Get */
 app.get('/', function(req, res) {
     res.render("index");
+});
+
+app.get('/:slug', function(req, res) {
+    const slug = req.params.slug;
+
+    db.findOne({ slug }, (err, doc) => {
+        if (doc && doc.url) {
+            res.redirect(doc.url);
+        } else {
+            res.status(404).send("Short URL not found!");
+        }
+    });
 });
 
 /* Listen */
